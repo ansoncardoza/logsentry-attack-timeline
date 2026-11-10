@@ -103,3 +103,69 @@ def test_pdf_report_rejects_non_dictionary_input(tmp_path):
             [],
             tmp_path / "invalid_report.pdf",
         )
+
+
+def test_pdf_report_handles_empty_analysis_results(tmp_path):
+    """The exporter should generate a PDF when there are no events or alerts."""
+
+    results = {
+        "summary": {
+            "total_events": 0,
+            "total_alerts": 0,
+            "total_incidents": 0,
+        },
+        "parsed_events": {
+            "authentication": [],
+            "apache": [],
+            "firewall": [],
+        },
+        "alerts": [],
+        "incidents": [],
+        "incident_results": [],
+    }
+
+    output_path = tmp_path / "empty_report.pdf"
+
+    report_path = generate_pdf_report(results, output_path)
+
+    assert report_path.is_file()
+    assert report_path.stat().st_size > 0
+
+    with report_path.open("rb") as file:
+        assert file.read(5) == b"%PDF-"
+
+
+def test_pdf_report_handles_special_characters(tmp_path):
+    """Log-derived text containing HTML characters should not break PDF generation."""
+
+    results = sample_analysis_results()
+    results["alerts"][0]["description"] = (
+        '<script>alert("test")</script> '
+        'Suspicious request: /search?a=1&b=2'
+    )
+
+    output_path = tmp_path / "special_characters_report.pdf"
+
+    report_path = generate_pdf_report(results, output_path)
+
+    assert report_path.is_file()
+    assert report_path.stat().st_size > 0
+
+
+def test_pdf_report_handles_unknown_alert_mapping(tmp_path):
+    """Unknown detection types should not prevent PDF generation."""
+
+    results = sample_analysis_results()
+    results["alerts"].append({
+        "alert_type": "Unknown Detection",
+        "severity": "Low",
+        "source_ip": "203.0.113.99",
+        "description": "Unrecognized detection type."
+    })
+
+    output_path = tmp_path / "unknown_mapping_report.pdf"
+
+    report_path = generate_pdf_report(results, output_path)
+
+    assert report_path.is_file()
+    assert report_path.stat().st_size > 0

@@ -49,3 +49,43 @@ def test_parse_missing_response_size():
     result = parse_apache_log(line)
 
     assert result["response_size"] is None
+
+def test_parse_empty_log_entry():
+    with pytest.raises(ValueError, match="Invalid Apache access log format"):
+        parse_apache_log("")
+
+
+def test_parse_incomplete_http_request():
+    line = (
+        '203.0.113.60 - - '
+        '[10/Nov/2026:09:35:02 +0000] '
+        '"GET /.env HTTP/1.1"'
+    )
+
+    with pytest.raises(ValueError):
+        parse_apache_log(line)
+
+
+def test_parse_request_with_query_string():
+    line = (
+        '203.0.113.60 - - '
+        '[10/Nov/2026:09:35:02 +0000] '
+        '"GET /search?q=admin HTTP/1.1" 200 1024'
+    )
+
+    result = parse_apache_log(line)
+
+    assert result["path"] == "/search?q=admin"
+    assert result["status_code"] == 200
+    assert result["response_size"] == 1024
+
+
+def test_parse_rejects_unexpected_trailing_data():
+    line = (
+        '203.0.113.60 - - '
+        '[10/Nov/2026:09:35:02 +0000] '
+        '"GET /.env HTTP/1.1" 404 512 EXTRA'
+    )
+
+    with pytest.raises(ValueError):
+        parse_apache_log(line)

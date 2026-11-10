@@ -25,7 +25,9 @@ def parse_firewall_log(line, year=2026):
     Raises ValueError if the entry is malformed.
     """
 
-    match = FIREWALL_LOG_PATTERN.fullmatch(line.lstrip("\ufeff").strip())
+    match = FIREWALL_LOG_PATTERN.fullmatch(
+        line.lstrip("\ufeff").strip()
+    )
 
     if not match:
         raise ValueError("Invalid firewall log format")
@@ -41,6 +43,18 @@ def parse_firewall_log(line, year=2026):
     except ValueError as error:
         raise ValueError("Invalid firewall timestamp") from error
 
+    # Convert ports into integers.
+    source_port = int(data["source_port"])
+    destination_port = int(data["destination_port"])
+
+    # Validate source port.
+    if not 1 <= source_port <= 65535:
+        raise ValueError("Invalid firewall source port")
+
+    # Validate destination port.
+    if not 1 <= destination_port <= 65535:
+        raise ValueError("Invalid firewall destination port")
+
     return {
         "timestamp": timestamp.isoformat(),
         "hostname": data["hostname"],
@@ -49,6 +63,6 @@ def parse_firewall_log(line, year=2026):
         "source_ip": data["source_ip"],
         "destination_ip": data["destination_ip"],
         "protocol": data["protocol"],
-        "source_port": int(data["source_port"]),
-        "destination_port": int(data["destination_port"])
+        "source_port": source_port,
+        "destination_port": destination_port
     }

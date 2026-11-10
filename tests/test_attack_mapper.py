@@ -88,3 +88,44 @@ def test_unknown_alert_is_skipped_in_incident():
 def test_missing_alerts_raises_error():
     with pytest.raises(ValueError, match="Incident is missing alerts"):
         map_incident_to_attack({"incident_id": "INC-001"})
+
+
+def test_mapping_contains_required_reference_fields():
+    alert = {
+        "alert_type": "SSH Brute-Force Attempt"
+    }
+
+    result = map_alert_to_attack(alert)
+
+    assert result["technique"]
+    assert result["technique_id"]
+    assert result["tactic"]
+    assert result["url"].startswith("https://attack.mitre.org/")
+    assert result["rationale"]
+
+
+def test_alert_without_type_returns_none():
+    alert = {}
+
+    assert map_alert_to_attack(alert) is None
+
+
+def test_incident_with_empty_alert_list_returns_empty_mappings():
+    incident = {
+        "incident_id": "INC-002",
+        "alerts": []
+    }
+
+    assert map_incident_to_attack(incident) == []
+
+
+def test_mapping_preserves_original_alert_type():
+    alert = {
+        "alert_type": "Possible Web Path Reconnaissance",
+        "source_ip": "203.0.113.60"
+    }
+
+    result = map_alert_to_attack(alert)
+
+    assert result["alert_type"] == alert["alert_type"]
+    assert result["technique_id"] == "T1595.003"

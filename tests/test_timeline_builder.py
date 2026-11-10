@@ -109,3 +109,69 @@ def test_empty_alert_list_returns_empty_timeline():
     timeline = build_timeline({"alerts": []})
 
     assert timeline == []
+
+
+def test_timeline_handles_different_timezone_offsets():
+    incident = {
+        "alerts": [
+            {
+                "alert_type": "Later Event",
+                "first_seen": "2026-11-10T11:00:00+02:00"
+            },
+            {
+                "alert_type": "Earlier Event",
+                "first_seen": "2026-11-10T08:30:00+00:00"
+            }
+        ]
+    }
+
+    timeline = build_timeline(incident)
+
+    assert timeline[0]["event_type"] == "Earlier Event"
+    assert timeline[1]["event_type"] == "Later Event"
+
+
+def test_timeline_uses_incident_source_ip_as_fallback():
+    incident = {
+        "source_ip": "203.0.113.99",
+        "alerts": [
+            {
+                "alert_type": "Test Event",
+                "first_seen": "2026-11-10T09:15:00"
+            }
+        ]
+    }
+
+    timeline = build_timeline(incident)
+
+    assert timeline[0]["source_ip"] == "203.0.113.99"
+
+
+def test_timeline_uses_fallback_values_for_optional_fields():
+    incident = {
+        "alerts": [
+            {
+                "alert_type": "Test Event",
+                "first_seen": "2026-11-10T09:15:00"
+            }
+        ]
+    }
+
+    timeline = build_timeline(incident)
+
+    assert timeline[0]["severity"] == "Unknown"
+    assert timeline[0]["description"] == "Test Event"
+
+
+def test_timeline_rejects_invalid_timestamp():
+    incident = {
+        "alerts": [
+            {
+                "alert_type": "Test Event",
+                "first_seen": "not-a-valid-timestamp"
+            }
+        ]
+    }
+
+    with pytest.raises(ValueError):
+        build_timeline(incident)

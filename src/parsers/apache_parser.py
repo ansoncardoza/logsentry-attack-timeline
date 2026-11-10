@@ -24,7 +24,7 @@ def parse_apache_log(line):
     Raises ValueError if the log entry is malformed.
     """
 
-    match = APACHE_LOG_PATTERN.match(line.strip())
+    match = APACHE_LOG_PATTERN.fullmatch(line.strip())
 
     if not match:
         raise ValueError("Invalid Apache access log format")

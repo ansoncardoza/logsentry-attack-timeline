@@ -11,11 +11,12 @@ def json_serializer(value):
     """
     Convert Python objects that JSON cannot serialize directly.
     """
+
     if isinstance(value, datetime):
         return value.isoformat()
 
     if isinstance(value, Path):
-        return str(value)
+        return value.as_posix()
 
     raise TypeError(
         f"Object of type {type(value).__name__} "

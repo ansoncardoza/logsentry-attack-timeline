@@ -128,3 +128,67 @@ def test_json_report_rejects_non_dictionary_input(tmp_path):
             [],
             tmp_path / "invalid_report.json",
         )
+
+
+def test_json_report_skips_unknown_alert_mappings(tmp_path):
+    results = sample_analysis_results()
+    results["alerts"].append({
+        "alert_type": "Unknown Detection",
+        "severity": "Low",
+        "source_ip": "203.0.113.99"
+    })
+
+    output_path = tmp_path / "unknown_mapping_report.json"
+
+    generate_json_report(results, output_path)
+
+    with output_path.open("r", encoding="utf-8") as file:
+        report = json.load(file)
+
+    assert len(report["alerts"]) == 2
+    assert len(report["alert_mappings"]) == 1
+    assert report["alert_mappings"][0]["technique_id"] == "T1110.001"
+
+
+def test_json_report_serializes_path_objects(tmp_path):
+    results = sample_analysis_results()
+    results["parsed_events"]["source_file"] = Path("data/raw/auth.log")
+
+    output_path = tmp_path / "path_report.json"
+
+    generate_json_report(results, output_path)
+
+    with output_path.open("r", encoding="utf-8") as file:
+        report = json.load(file)
+
+    assert report["parsed_events"]["source_file"] == "data/raw/auth.log"
+
+
+def test_json_report_handles_empty_analysis_results(tmp_path):
+    results = {
+        "summary": {
+            "total_events": 0,
+            "total_alerts": 0,
+            "total_incidents": 0
+        },
+        "parsed_events": {
+            "authentication": [],
+            "apache": [],
+            "firewall": []
+        },
+        "alerts": [],
+        "incidents": [],
+        "incident_results": []
+    }
+
+    output_path = tmp_path / "empty_report.json"
+
+    generate_json_report(results, output_path)
+
+    with output_path.open("r", encoding="utf-8") as file:
+        report = json.load(file)
+
+    assert report["summary"]["total_events"] == 0
+    assert report["alerts"] == []
+    assert report["alert_mappings"] == []
+    assert report["incidents"] == []

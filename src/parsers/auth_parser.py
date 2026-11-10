@@ -17,7 +17,6 @@ AUTH_LOG_PATTERN = re.compile(
     r'ssh2'
 )
 
-
 def parse_auth_log(line, year=2026):
     """
     Parse one Linux SSH authentication log entry.
@@ -42,6 +41,11 @@ def parse_auth_log(line, year=2026):
     except ValueError as error:
         raise ValueError("Invalid authentication timestamp") from error
 
+    source_port = int(data["source_port"])
+
+    if not 1 <= source_port <= 65535:
+        raise ValueError("Invalid authentication source port")
+
     return {
         "timestamp": timestamp.isoformat(),
         "hostname": data["hostname"],
@@ -51,5 +55,5 @@ def parse_auth_log(line, year=2026):
         "username": data["username"],
         "invalid_user": data["invalid_user"] is not None,
         "source_ip": data["source_ip"],
-        "source_port": int(data["source_port"])
+        "source_port": source_port
     }

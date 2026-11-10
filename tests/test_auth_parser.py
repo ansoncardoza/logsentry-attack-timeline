@@ -53,3 +53,34 @@ def test_parse_invalid_auth_timestamp():
 
     with pytest.raises(ValueError, match="Invalid authentication timestamp"):
         parse_auth_log(line)
+
+
+def test_parse_empty_auth_entry():
+    with pytest.raises(ValueError, match="Invalid authentication log format"):
+        parse_auth_log("")
+
+
+def test_parse_invalid_month():
+    line = (
+        "Xyz 10 09:15:22 server01 "
+        "sshd[2451]: Failed password for admin "
+        "from 203.0.113.50 port 51234 ssh2"
+    )
+
+    with pytest.raises(ValueError, match="Invalid authentication timestamp"):
+        parse_auth_log(line)
+
+
+
+def test_parse_invalid_source_port():
+    line = (
+        "Nov 10 09:15:22 server01 "
+        "sshd[2451]: Failed password for admin "
+        "from 203.0.113.50 port 99999 ssh2"
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="Invalid authentication source port"
+    ):
+        parse_auth_log(line)

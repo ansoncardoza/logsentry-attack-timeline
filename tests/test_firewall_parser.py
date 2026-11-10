@@ -52,3 +52,52 @@ def test_parse_invalid_firewall_timestamp():
 
     with pytest.raises(ValueError, match="Invalid firewall timestamp"):
         parse_firewall_log(line)
+
+
+def test_parse_empty_firewall_entry():
+    with pytest.raises(ValueError, match="Invalid firewall log format"):
+        parse_firewall_log("")
+
+
+def test_parse_firewall_entry_with_missing_destination_port():
+    line = (
+        "Nov 10 10:00:01 server01 kernel: [UFW BLOCK] "
+        "IN=eth0 OUT= SRC=203.0.113.70 DST=192.168.1.100 "
+        "PROTO=TCP SPT=51001"
+    )
+
+    with pytest.raises(ValueError, match="Invalid firewall log format"):
+        parse_firewall_log(line)
+
+
+def test_parse_firewall_entry_with_trailing_data():
+    line = (
+        "Nov 10 10:00:01 server01 kernel: [UFW BLOCK] "
+        "IN=eth0 OUT= SRC=203.0.113.70 DST=192.168.1.100 "
+        "PROTO=TCP SPT=51001 DPT=22 unexpected"
+    )
+
+    with pytest.raises(ValueError, match="Invalid firewall log format"):
+        parse_firewall_log(line)
+
+
+def test_parse_firewall_entry_with_invalid_source_port():
+    line = (
+        "Nov 10 10:00:01 server01 kernel: [UFW BLOCK] "
+        "IN=eth0 OUT= SRC=203.0.113.70 DST=192.168.1.100 "
+        "PROTO=TCP SPT=99999 DPT=22"
+    )
+
+    with pytest.raises(ValueError, match="Invalid firewall source port"):
+        parse_firewall_log(line)
+
+
+def test_parse_firewall_entry_with_invalid_destination_port():
+    line = (
+        "Nov 10 10:00:01 server01 kernel: [UFW BLOCK] "
+        "IN=eth0 OUT= SRC=203.0.113.70 DST=192.168.1.100 "
+        "PROTO=TCP SPT=51001 DPT=70000"
+    )
+
+    with pytest.raises(ValueError, match="Invalid firewall destination port"):
+        parse_firewall_log(line)
