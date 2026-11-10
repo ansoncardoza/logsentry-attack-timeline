@@ -74,7 +74,7 @@ LogSentry uses rule-based detection rather than machine learning.
 | Detection | Detection logic | MITRE ATT&CK reference |
 |---|---|---|
 | SSH Brute Force | Five or more failed SSH login attempts from one source IP within 60 seconds by default | T1110.001 – Password Guessing |
-| Possible Port Scan | Five or more distinct destination ports accessed from one source IP to one destination IP within 60 seconds by default | T1046 – Network Service Discovery |
+| Possible Port Scan | Five or more distinct destination ports targeted by one source IP against one destination IP within 60 seconds by default | T1046 – Network Service Discovery |
 | Possible Web Path Reconnaissance | Three or more distinct suspicious web paths requested from one source IP within 60 seconds by default | T1595.003 – Wordlist Scanning |
 
 Detection thresholds can be configured through the analysis pipeline.
