@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 
 from src.analysis_pipeline import run_analysis
+from src.reporting.json_reporter import generate_json_report
+from src.reporting.pdf_reporter import generate_pdf_report
 
 
 # --------------------------------------------------
@@ -93,6 +95,41 @@ st.sidebar.divider()
 if st.sidebar.button("Refresh Analysis"):
     load_analysis.clear()
     st.rerun()
+
+
+# --------------------------------------------------
+# REPORT DOWNLOADS
+# --------------------------------------------------
+
+st.sidebar.divider()
+st.sidebar.subheader("Export Reports")
+
+try:
+    # Generate reports using the existing analysis results.
+    json_report_path = generate_json_report(results)
+    pdf_report_path = generate_pdf_report(results)
+
+    # JSON download button.
+    st.sidebar.download_button(
+        label="Download JSON Report",
+        data=json_report_path.read_bytes(),
+        file_name="logsentry_report.json",
+        mime="application/json",
+        use_container_width=True,
+    )
+
+    # PDF download button.
+    st.sidebar.download_button(
+        label="Download PDF Report",
+        data=pdf_report_path.read_bytes(),
+        file_name="logsentry_report.pdf",
+        mime="application/pdf",
+        use_container_width=True,
+    )
+
+except Exception as error:
+    st.sidebar.error(f"Report generation failed: {error}")
+
 
 st.sidebar.caption("Rule-based security analysis")
 st.sidebar.caption("Synthetic / Authorized Logs Only")
