@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 
+from pathlib import Path
 from src.analysis_pipeline import run_analysis
 from src.reporting.json_reporter import generate_json_report
 from src.reporting.pdf_reporter import generate_pdf_report
@@ -47,22 +48,40 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
 # --------------------------------------------------
 # LOAD ANALYSIS
 # --------------------------------------------------
 
+scenario = st.selectbox(
+    "Select Analysis Scenario",
+    [
+        "Default Sample",
+        "Correlated Attack",
+    ],
+)
+
 @st.cache_data(ttl=30)
-def load_analysis():
+def load_analysis(selected_scenario):
+
+    if selected_scenario == "Correlated Attack":
+
+        scenario_path = Path("data/scenarios/correlated_attack")
+
+        return run_analysis(
+            auth_log_path=scenario_path / "auth.log",
+            apache_log_path=scenario_path / "apache_access.log",
+            firewall_log_path=scenario_path / "firewall.log",
+            year=2026,
+        )
+
     return run_analysis()
 
 
 try:
-    results = load_analysis()
+    results = load_analysis(scenario)
 except Exception as error:
     st.error(f"Analysis could not be completed: {error}")
     st.stop()
-
 
 summary = results["summary"]
 alerts = results["alerts"]

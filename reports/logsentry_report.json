@@ -2,122 +2,82 @@
     "metadata": {
         "project": "LogSentry",
         "report_type": "Security Investigation Report",
-        "report_generated_at": "2026-11-10T19:39:10.754826+00:00",
+        "report_generated_at": "2026-11-11T21:49:30.334947+00:00",
         "report_version": "1.0"
     },
     "summary": {
-        "authentication_events": 7,
-        "apache_events": 7,
-        "firewall_events": 6,
-        "total_events": 20,
+        "authentication_events": 5,
+        "apache_events": 4,
+        "firewall_events": 5,
+        "total_events": 14,
         "brute_force_alerts": 1,
         "port_scan_alerts": 1,
         "web_path_alerts": 1,
         "total_alerts": 3,
-        "total_incidents": 0
+        "total_incidents": 1
     },
     "parsed_events": {
         "authentication": [
             {
-                "timestamp": "2026-11-10T09:10:12",
+                "timestamp": "2026-11-12T09:15:12",
                 "hostname": "server01",
-                "process_id": 2101,
-                "result": "Accepted",
-                "method": "password",
-                "username": "anson",
-                "invalid_user": false,
-                "source_ip": "192.168.1.20",
-                "source_port": 50122
-            },
-            {
-                "timestamp": "2026-11-10T09:15:22",
-                "hostname": "server01",
-                "process_id": 2451,
+                "process_id": 3101,
                 "result": "Failed",
                 "method": "password",
                 "username": "admin",
                 "invalid_user": true,
-                "source_ip": "203.0.113.50",
-                "source_port": 51234
+                "source_ip": "203.0.113.99",
+                "source_port": 52101
             },
             {
-                "timestamp": "2026-11-10T09:15:28",
+                "timestamp": "2026-11-12T09:15:18",
                 "hostname": "server01",
-                "process_id": 2452,
+                "process_id": 3102,
                 "result": "Failed",
                 "method": "password",
                 "username": "root",
                 "invalid_user": false,
-                "source_ip": "203.0.113.50",
-                "source_port": 51235
+                "source_ip": "203.0.113.99",
+                "source_port": 52102
             },
             {
-                "timestamp": "2026-11-10T09:15:34",
+                "timestamp": "2026-11-12T09:15:24",
                 "hostname": "server01",
-                "process_id": 2453,
+                "process_id": 3103,
                 "result": "Failed",
                 "method": "password",
                 "username": "test",
                 "invalid_user": false,
-                "source_ip": "203.0.113.50",
-                "source_port": 51236
+                "source_ip": "203.0.113.99",
+                "source_port": 52103
             },
             {
-                "timestamp": "2026-11-10T09:15:40",
+                "timestamp": "2026-11-12T09:15:30",
                 "hostname": "server01",
-                "process_id": 2454,
+                "process_id": 3104,
                 "result": "Failed",
                 "method": "password",
                 "username": "anson",
                 "invalid_user": false,
-                "source_ip": "203.0.113.50",
-                "source_port": 51237
+                "source_ip": "203.0.113.99",
+                "source_port": 52104
             },
             {
-                "timestamp": "2026-11-10T09:15:46",
+                "timestamp": "2026-11-12T09:15:36",
                 "hostname": "server01",
-                "process_id": 2455,
+                "process_id": 3105,
                 "result": "Failed",
                 "method": "password",
                 "username": "admin",
                 "invalid_user": true,
-                "source_ip": "203.0.113.50",
-                "source_port": 51238
-            },
-            {
-                "timestamp": "2026-11-10T09:20:15",
-                "hostname": "server01",
-                "process_id": 2501,
-                "result": "Accepted",
-                "method": "password",
-                "username": "anson",
-                "invalid_user": false,
-                "source_ip": "192.168.1.20",
-                "source_port": 50130
+                "source_ip": "203.0.113.99",
+                "source_port": 52105
             }
         ],
         "apache": [
             {
-                "source_ip": "192.168.1.20",
-                "timestamp": "2026-11-10T09:30:00+00:00",
-                "method": "GET",
-                "path": "/index.html",
-                "protocol": "HTTP/1.1",
-                "status_code": 200,
-                "response_size": 1024
-            },
-            {
-                "source_ip": "192.168.1.20",
-                "timestamp": "2026-11-10T09:30:05+00:00",
-                "method": "GET",
-                "path": "/about.html",
-                "protocol": "HTTP/1.1",
-                "status_code": 200,
-                "response_size": 2048
-            },
-            {
-                "source_ip": "203.0.113.60",
-                "timestamp": "2026-11-10T09:35:00+00:00",
+                "source_ip": "203.0.113.99",
+                "timestamp": "2026-11-12T09:17:01+00:00",
                 "method": "GET",
                 "path": "/admin",
                 "protocol": "HTTP/1.1",
@@ -125,8 +85,8 @@
                 "response_size": 512
             },
             {
-                "source_ip": "203.0.113.60",
-                "timestamp": "2026-11-10T09:35:02+00:00",
+                "source_ip": "203.0.113.99",
+                "timestamp": "2026-11-12T09:17:03+00:00",
                 "method": "GET",
                 "path": "/.env",
                 "protocol": "HTTP/1.1",
@@ -134,8 +94,8 @@
                 "response_size": 512
             },
             {
-                "source_ip": "203.0.113.60",
-                "timestamp": "2026-11-10T09:35:04+00:00",
+                "source_ip": "203.0.113.99",
+                "timestamp": "2026-11-12T09:17:05+00:00",
                 "method": "GET",
                 "path": "/phpmyadmin",
                 "protocol": "HTTP/1.1",
@@ -143,90 +103,70 @@
                 "response_size": 512
             },
             {
-                "source_ip": "203.0.113.60",
-                "timestamp": "2026-11-10T09:35:06+00:00",
+                "source_ip": "203.0.113.99",
+                "timestamp": "2026-11-12T09:17:07+00:00",
                 "method": "GET",
                 "path": "/wp-config.php",
                 "protocol": "HTTP/1.1",
                 "status_code": 404,
                 "response_size": 512
-            },
-            {
-                "source_ip": "192.168.1.20",
-                "timestamp": "2026-11-10T09:40:00+00:00",
-                "method": "GET",
-                "path": "/contact.html",
-                "protocol": "HTTP/1.1",
-                "status_code": 200,
-                "response_size": 1500
             }
         ],
         "firewall": [
             {
-                "timestamp": "2026-11-10T10:00:01",
+                "timestamp": "2026-11-12T09:16:01",
                 "hostname": "server01",
                 "action": "BLOCK",
                 "interface": "eth0",
-                "source_ip": "203.0.113.70",
+                "source_ip": "203.0.113.99",
                 "destination_ip": "192.168.1.100",
                 "protocol": "TCP",
-                "source_port": 51001,
+                "source_port": 53001,
                 "destination_port": 22
             },
             {
-                "timestamp": "2026-11-10T10:00:02",
+                "timestamp": "2026-11-12T09:16:02",
                 "hostname": "server01",
                 "action": "BLOCK",
                 "interface": "eth0",
-                "source_ip": "203.0.113.70",
+                "source_ip": "203.0.113.99",
                 "destination_ip": "192.168.1.100",
                 "protocol": "TCP",
-                "source_port": 51002,
+                "source_port": 53002,
                 "destination_port": 80
             },
             {
-                "timestamp": "2026-11-10T10:00:03",
+                "timestamp": "2026-11-12T09:16:03",
                 "hostname": "server01",
                 "action": "BLOCK",
                 "interface": "eth0",
-                "source_ip": "203.0.113.70",
+                "source_ip": "203.0.113.99",
                 "destination_ip": "192.168.1.100",
                 "protocol": "TCP",
-                "source_port": 51003,
+                "source_port": 53003,
                 "destination_port": 443
             },
             {
-                "timestamp": "2026-11-10T10:00:04",
+                "timestamp": "2026-11-12T09:16:04",
                 "hostname": "server01",
                 "action": "BLOCK",
                 "interface": "eth0",
-                "source_ip": "203.0.113.70",
+                "source_ip": "203.0.113.99",
                 "destination_ip": "192.168.1.100",
                 "protocol": "TCP",
-                "source_port": 51004,
+                "source_port": 53004,
                 "destination_port": 3389
             },
             {
-                "timestamp": "2026-11-10T10:00:05",
+                "timestamp": "2026-11-12T09:16:05",
                 "hostname": "server01",
                 "action": "BLOCK",
                 "interface": "eth0",
-                "source_ip": "203.0.113.70",
+                "source_ip": "203.0.113.99",
                 "destination_ip": "192.168.1.100",
                 "protocol": "TCP",
-                "source_port": 51005,
+                "source_port": 53005,
                 "destination_port": 8080
-            },
-            {
-                "timestamp": "2026-11-10T10:05:01",
-                "hostname": "server01",
-                "action": "BLOCK",
-                "interface": "eth0",
-                "source_ip": "192.168.1.20",
-                "destination_ip": "192.168.1.100",
-                "protocol": "TCP",
-                "source_port": 50100,
-                "destination_port": 22
             }
         ]
     },
@@ -234,22 +174,22 @@
         {
             "alert_type": "SSH Brute-Force Attempt",
             "severity": "Medium",
-            "source_ip": "203.0.113.50",
+            "source_ip": "203.0.113.99",
             "failed_attempts": 5,
-            "first_seen": "2026-11-10T09:15:22",
-            "last_seen": "2026-11-10T09:15:46",
+            "first_seen": "2026-11-12T09:15:12",
+            "last_seen": "2026-11-12T09:15:36",
             "usernames": [
                 "admin",
                 "anson",
                 "root",
                 "test"
             ],
-            "description": "5 failed SSH login attempts from 203.0.113.50 within 60 seconds."
+            "description": "5 failed SSH login attempts from 203.0.113.99 within 60 seconds."
         },
         {
             "alert_type": "Possible Port Scan",
             "severity": "Medium",
-            "source_ip": "203.0.113.70",
+            "source_ip": "203.0.113.99",
             "destination_ip": "192.168.1.100",
             "distinct_ports": 5,
             "destination_ports": [
@@ -259,17 +199,17 @@
                 3389,
                 8080
             ],
-            "first_seen": "2026-11-10T10:00:01",
-            "last_seen": "2026-11-10T10:00:05",
+            "first_seen": "2026-11-12T09:16:01",
+            "last_seen": "2026-11-12T09:16:05",
             "actions": [
                 "BLOCK"
             ],
-            "description": "203.0.113.70 targeted 5 distinct destination ports on 192.168.1.100 within 60 seconds."
+            "description": "203.0.113.99 targeted 5 distinct destination ports on 192.168.1.100 within 60 seconds."
         },
         {
             "alert_type": "Possible Web Path Reconnaissance",
             "severity": "Medium",
-            "source_ip": "203.0.113.60",
+            "source_ip": "203.0.113.99",
             "distinct_paths": 4,
             "suspicious_paths": [
                 "/.env",
@@ -278,12 +218,12 @@
                 "/wp-config.php"
             ],
             "request_count": 4,
-            "first_seen": "2026-11-10T09:35:00+00:00",
-            "last_seen": "2026-11-10T09:35:06+00:00",
+            "first_seen": "2026-11-12T09:17:01+00:00",
+            "last_seen": "2026-11-12T09:17:07+00:00",
             "status_codes": [
                 404
             ],
-            "description": "203.0.113.60 requested 4 distinct suspicious web paths within 60 seconds."
+            "description": "203.0.113.99 requested 4 distinct suspicious web paths within 60 seconds."
         }
     ],
     "alert_mappings": [
@@ -312,6 +252,251 @@
             "rationale": "Requests for multiple sensitive or commonly targeted web paths are consistent with wordlist-based reconnaissance."
         }
     ],
-    "incidents": [],
-    "incident_results": []
+    "incidents": [
+        {
+            "incident_id": "INC-001",
+            "source_ip": "203.0.113.99",
+            "alert_count": 3,
+            "alert_types": [
+                "Possible Port Scan",
+                "Possible Web Path Reconnaissance",
+                "SSH Brute-Force Attempt"
+            ],
+            "first_seen": "2026-11-12T09:15:12+00:00",
+            "last_seen": "2026-11-12T09:17:07+00:00",
+            "alerts": [
+                {
+                    "alert_type": "SSH Brute-Force Attempt",
+                    "severity": "Medium",
+                    "source_ip": "203.0.113.99",
+                    "failed_attempts": 5,
+                    "first_seen": "2026-11-12T09:15:12",
+                    "last_seen": "2026-11-12T09:15:36",
+                    "usernames": [
+                        "admin",
+                        "anson",
+                        "root",
+                        "test"
+                    ],
+                    "description": "5 failed SSH login attempts from 203.0.113.99 within 60 seconds."
+                },
+                {
+                    "alert_type": "Possible Port Scan",
+                    "severity": "Medium",
+                    "source_ip": "203.0.113.99",
+                    "destination_ip": "192.168.1.100",
+                    "distinct_ports": 5,
+                    "destination_ports": [
+                        22,
+                        80,
+                        443,
+                        3389,
+                        8080
+                    ],
+                    "first_seen": "2026-11-12T09:16:01",
+                    "last_seen": "2026-11-12T09:16:05",
+                    "actions": [
+                        "BLOCK"
+                    ],
+                    "description": "203.0.113.99 targeted 5 distinct destination ports on 192.168.1.100 within 60 seconds."
+                },
+                {
+                    "alert_type": "Possible Web Path Reconnaissance",
+                    "severity": "Medium",
+                    "source_ip": "203.0.113.99",
+                    "distinct_paths": 4,
+                    "suspicious_paths": [
+                        "/.env",
+                        "/admin",
+                        "/phpmyadmin",
+                        "/wp-config.php"
+                    ],
+                    "request_count": 4,
+                    "first_seen": "2026-11-12T09:17:01+00:00",
+                    "last_seen": "2026-11-12T09:17:07+00:00",
+                    "status_codes": [
+                        404
+                    ],
+                    "description": "203.0.113.99 requested 4 distinct suspicious web paths within 60 seconds."
+                }
+            ],
+            "description": "3 different detection types were observed from 203.0.113.99 within 300 seconds."
+        }
+    ],
+    "incident_results": [
+        {
+            "incident": {
+                "incident_id": "INC-001",
+                "source_ip": "203.0.113.99",
+                "alert_count": 3,
+                "alert_types": [
+                    "Possible Port Scan",
+                    "Possible Web Path Reconnaissance",
+                    "SSH Brute-Force Attempt"
+                ],
+                "first_seen": "2026-11-12T09:15:12+00:00",
+                "last_seen": "2026-11-12T09:17:07+00:00",
+                "alerts": [
+                    {
+                        "alert_type": "SSH Brute-Force Attempt",
+                        "severity": "Medium",
+                        "source_ip": "203.0.113.99",
+                        "failed_attempts": 5,
+                        "first_seen": "2026-11-12T09:15:12",
+                        "last_seen": "2026-11-12T09:15:36",
+                        "usernames": [
+                            "admin",
+                            "anson",
+                            "root",
+                            "test"
+                        ],
+                        "description": "5 failed SSH login attempts from 203.0.113.99 within 60 seconds."
+                    },
+                    {
+                        "alert_type": "Possible Port Scan",
+                        "severity": "Medium",
+                        "source_ip": "203.0.113.99",
+                        "destination_ip": "192.168.1.100",
+                        "distinct_ports": 5,
+                        "destination_ports": [
+                            22,
+                            80,
+                            443,
+                            3389,
+                            8080
+                        ],
+                        "first_seen": "2026-11-12T09:16:01",
+                        "last_seen": "2026-11-12T09:16:05",
+                        "actions": [
+                            "BLOCK"
+                        ],
+                        "description": "203.0.113.99 targeted 5 distinct destination ports on 192.168.1.100 within 60 seconds."
+                    },
+                    {
+                        "alert_type": "Possible Web Path Reconnaissance",
+                        "severity": "Medium",
+                        "source_ip": "203.0.113.99",
+                        "distinct_paths": 4,
+                        "suspicious_paths": [
+                            "/.env",
+                            "/admin",
+                            "/phpmyadmin",
+                            "/wp-config.php"
+                        ],
+                        "request_count": 4,
+                        "first_seen": "2026-11-12T09:17:01+00:00",
+                        "last_seen": "2026-11-12T09:17:07+00:00",
+                        "status_codes": [
+                            404
+                        ],
+                        "description": "203.0.113.99 requested 4 distinct suspicious web paths within 60 seconds."
+                    }
+                ],
+                "description": "3 different detection types were observed from 203.0.113.99 within 300 seconds."
+            },
+            "timeline": [
+                {
+                    "timestamp": "2026-11-12T09:15:12+00:00",
+                    "event_type": "SSH Brute-Force Attempt",
+                    "source_ip": "203.0.113.99",
+                    "severity": "Medium",
+                    "description": "5 failed SSH login attempts from 203.0.113.99 within 60 seconds.",
+                    "evidence": {
+                        "alert_type": "SSH Brute-Force Attempt",
+                        "severity": "Medium",
+                        "source_ip": "203.0.113.99",
+                        "failed_attempts": 5,
+                        "first_seen": "2026-11-12T09:15:12",
+                        "last_seen": "2026-11-12T09:15:36",
+                        "usernames": [
+                            "admin",
+                            "anson",
+                            "root",
+                            "test"
+                        ],
+                        "description": "5 failed SSH login attempts from 203.0.113.99 within 60 seconds."
+                    }
+                },
+                {
+                    "timestamp": "2026-11-12T09:16:01+00:00",
+                    "event_type": "Possible Port Scan",
+                    "source_ip": "203.0.113.99",
+                    "severity": "Medium",
+                    "description": "203.0.113.99 targeted 5 distinct destination ports on 192.168.1.100 within 60 seconds.",
+                    "evidence": {
+                        "alert_type": "Possible Port Scan",
+                        "severity": "Medium",
+                        "source_ip": "203.0.113.99",
+                        "destination_ip": "192.168.1.100",
+                        "distinct_ports": 5,
+                        "destination_ports": [
+                            22,
+                            80,
+                            443,
+                            3389,
+                            8080
+                        ],
+                        "first_seen": "2026-11-12T09:16:01",
+                        "last_seen": "2026-11-12T09:16:05",
+                        "actions": [
+                            "BLOCK"
+                        ],
+                        "description": "203.0.113.99 targeted 5 distinct destination ports on 192.168.1.100 within 60 seconds."
+                    }
+                },
+                {
+                    "timestamp": "2026-11-12T09:17:01+00:00",
+                    "event_type": "Possible Web Path Reconnaissance",
+                    "source_ip": "203.0.113.99",
+                    "severity": "Medium",
+                    "description": "203.0.113.99 requested 4 distinct suspicious web paths within 60 seconds.",
+                    "evidence": {
+                        "alert_type": "Possible Web Path Reconnaissance",
+                        "severity": "Medium",
+                        "source_ip": "203.0.113.99",
+                        "distinct_paths": 4,
+                        "suspicious_paths": [
+                            "/.env",
+                            "/admin",
+                            "/phpmyadmin",
+                            "/wp-config.php"
+                        ],
+                        "request_count": 4,
+                        "first_seen": "2026-11-12T09:17:01+00:00",
+                        "last_seen": "2026-11-12T09:17:07+00:00",
+                        "status_codes": [
+                            404
+                        ],
+                        "description": "203.0.113.99 requested 4 distinct suspicious web paths within 60 seconds."
+                    }
+                }
+            ],
+            "attack_mappings": [
+                {
+                    "alert_type": "SSH Brute-Force Attempt",
+                    "technique": "Brute Force: Password Guessing",
+                    "technique_id": "T1110.001",
+                    "tactic": "Credential Access",
+                    "url": "https://attack.mitre.org/techniques/T1110/001/",
+                    "rationale": "Repeated failed SSH password authentication attempts are consistent with password guessing activity."
+                },
+                {
+                    "alert_type": "Possible Port Scan",
+                    "technique": "Network Service Discovery",
+                    "technique_id": "T1046",
+                    "tactic": "Discovery",
+                    "url": "https://attack.mitre.org/techniques/T1046/",
+                    "rationale": "Attempts to reach multiple destination ports may indicate network service discovery."
+                },
+                {
+                    "alert_type": "Possible Web Path Reconnaissance",
+                    "technique": "Active Scanning: Wordlist Scanning",
+                    "technique_id": "T1595.003",
+                    "tactic": "Reconnaissance",
+                    "url": "https://attack.mitre.org/techniques/T1595/003/",
+                    "rationale": "Requests for multiple sensitive or commonly targeted web paths are consistent with wordlist-based reconnaissance."
+                }
+            ]
+        }
+    ]
 }
