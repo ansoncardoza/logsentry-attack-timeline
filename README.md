@@ -10,6 +10,8 @@ Security teams investigate activity across different log sources, including auth
 
 LogSentry addresses this challenge through rule-based log parsing, security detection, event correlation, timeline reconstruction, and investigation reporting.
 
+📸 **[View Project Screenshots](https://github.com/ansoncardoza/logsentry-attack-timeline/wiki/Project-Screenshots)**
+
 ## Key Features
 
 - **Log Parsing:** Processes Apache access logs, Linux authentication logs, and UFW firewall logs.
