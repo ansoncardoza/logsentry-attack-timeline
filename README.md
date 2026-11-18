@@ -10,7 +10,7 @@ Security teams investigate activity across different log sources, including auth
 
 LogSentry addresses this challenge through rule-based log parsing, security detection, event correlation, timeline reconstruction, and investigation reporting.
 
-📸 **[View Project Screenshots](https://github.com/ansoncardoza/logsentry-attack-timeline/wiki/Project-Screenshots)**
+📸 **[View Project Screenshots](https://github.com/ansoncardoza/logsentry-attack-timeline/wiki/Screenshots)**
 
 ## Key Features
 
