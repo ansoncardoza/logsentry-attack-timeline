@@ -29,7 +29,6 @@ LogSentry addresses this challenge through rule-based log parsing, security dete
 | Python 3.12 | Core application and analysis engine |
 | Regular Expressions | Log parsing |
 | Streamlit | Interactive dashboard |
-| Pandas | Tabular data presentation |
 | ReportLab | PDF report generation |
 | JSON | Data exchange and investigation reports |
 | Pytest | Automated testing |
@@ -102,7 +101,7 @@ cd logsentry-attack-timeline
 Windows PowerShell:
 
 ```powershell
-py -3.12 -m venv .venv
+python -m venv .venv
 ```
 
 Linux/macOS:
